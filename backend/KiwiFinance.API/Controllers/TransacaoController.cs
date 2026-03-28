@@ -28,4 +28,11 @@ public class TransacaoController : ControllerBase
         var transacoes = await _transacaoService.ListarPorUsuarioAsync(usuarioId);
         return Ok(transacoes);
     }
+
+    [HttpGet("{usuarioId}/resumo")]
+    public async Task<IActionResult> ObterResumo(Guid usuarioId)
+    {
+        var resumo = await _transacaoService.ObterResumoFinanceiroAsync(usuarioId);
+        return Ok(resumo);
+    }
 }
