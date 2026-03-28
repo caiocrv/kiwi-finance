@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using KiwiFinance.Core.Entities;
 using KiwiFinance.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KiwiFinance.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class TransacaoController : ControllerBase

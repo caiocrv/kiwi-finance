@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using KiwiFinance.Infrastructure.Data;
 using KiwiFinance.Core.Interfaces.Repositories;
 using KiwiFinance.Infrastructure.Repositories;
@@ -8,22 +11,45 @@ using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Carrega as variáveis do arquivo .env para a memória da máquina
+// 1. Carrega as variáveis do .env
 Env.TraversePath().Load();
 
-// 2. Tenta pegar a string de conexão do .env. Se não achar, lança um erro para avisar o desenvolvedor.
 var connectionString = Environment.GetEnvironmentVariable("SUPABASE_CONNECTION");
-if (string.IsNullOrEmpty(connectionString))
+var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
+
+if (string.IsNullOrEmpty(connectionString) || string.IsNullOrEmpty(jwtSecret))
 {
-    throw new Exception("String de conexão não encontrada! Verifique se o arquivo .env existe e contém a chave SUPABASE_CONNECTION.");
+    throw new Exception("Variáveis de ambiente (SUPABASE_CONNECTION ou JWT_SECRET) não encontradas no .env!");
 }
 
-// 3. Configura a conexão com o PostgreSQL do Supabase
+// 2. Banco de Dados
 builder.Services.AddDbContext<KiwiFinanceContext>(options =>
     options.UseNpgsql(connectionString));
 
-// 4. Injeção de Dependências (Camadas Core, Infrastructure e Services)
+// 3. Configuração de Autenticação JWT
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER"),
+        ValidAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret))
+    };
+});
+
+// 4. Injeção de Dependências
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>(); // Você precisará criar esta classe!
 builder.Services.AddScoped<ITransacaoRepository, TransacaoRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITransacaoService, TransacaoService>();
 
 builder.Services.AddControllers();
@@ -32,11 +58,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// 5. Ativa o Swagger para todos os ambientes (para facilitar os testes do PIM III)
+// 5. Middleware Pipeline
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();

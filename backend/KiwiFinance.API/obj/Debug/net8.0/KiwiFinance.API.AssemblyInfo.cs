@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KiwiFinance.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+12286f021631a8585b02046eb7c29d1dc355f3f1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d07f3a7d930f682ef635e2742d95e0cdf150da94")]
 [assembly: System.Reflection.AssemblyProductAttribute("KiwiFinance.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KiwiFinance.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
