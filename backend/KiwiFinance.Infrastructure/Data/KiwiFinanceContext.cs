@@ -13,7 +13,7 @@ public class KiwiFinanceContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Mapeia os nomes das tabelas para bater com o SQL que rodamos
+        // Mapeia os nomes exatos das tabelas no Supabase (respeitando maiúsculas/minúsculas)
         modelBuilder.Entity<Usuario>().ToTable("Usuario");
         modelBuilder.Entity<Transacao>().ToTable("Transacao");
         modelBuilder.Entity<Categoria>().ToTable("Categoria");

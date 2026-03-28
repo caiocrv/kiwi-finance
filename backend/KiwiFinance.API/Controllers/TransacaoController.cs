@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using KiwiFinance.Core.Entities;
+using KiwiFinance.Core.Interfaces.Services;
 
 namespace KiwiFinance.API.Controllers;
 
@@ -6,9 +8,24 @@ namespace KiwiFinance.API.Controllers;
 [Route("api/[controller]")]
 public class TransacaoController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult Teste()
+    private readonly ITransacaoService _transacaoService;
+
+    public TransacaoController(ITransacaoService transacaoService)
     {
-        return Ok("Backend da Kiwi Finance está funcionando!");
+        _transacaoService = transacaoService;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Criar([FromBody] Transacao transacao)
+    {
+        await _transacaoService.RegistrarTransacaoAsync(transacao);
+        return Ok(new { mensagem = "Transação salva com sucesso no Supabase!" });
+    }
+
+    [HttpGet("{usuarioId}")]
+    public async Task<IActionResult> Listar(Guid usuarioId)
+    {
+        var transacoes = await _transacaoService.ListarPorUsuarioAsync(usuarioId);
+        return Ok(transacoes);
     }
 }

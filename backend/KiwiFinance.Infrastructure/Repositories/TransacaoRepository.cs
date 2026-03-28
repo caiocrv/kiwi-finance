@@ -24,7 +24,6 @@ public class TransacaoRepository : ITransacaoRepository
     {
         return await _context.Transacoes
             .Where(t => t.UsuarioId == usuarioId)
-            .OrderByDescending(t => t.DataTransacao)
             .ToListAsync();
     }
 }

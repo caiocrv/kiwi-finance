@@ -4,15 +4,25 @@ using KiwiFinance.Core.Interfaces.Repositories;
 using KiwiFinance.Infrastructure.Repositories;
 using KiwiFinance.Core.Interfaces.Services;
 using KiwiFinance.Services.Services;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Configurar a conexão com o PostgreSQL do Supabase
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// 1. Carrega as variáveis do arquivo .env para a memória da máquina
+Env.TraversePath().Load();
+
+// 2. Tenta pegar a string de conexão do .env. Se não achar, lança um erro para avisar o desenvolvedor.
+var connectionString = Environment.GetEnvironmentVariable("SUPABASE_CONNECTION");
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new Exception("String de conexão não encontrada! Verifique se o arquivo .env existe e contém a chave SUPABASE_CONNECTION.");
+}
+
+// 3. Configura a conexão com o PostgreSQL do Supabase
 builder.Services.AddDbContext<KiwiFinanceContext>(options =>
     options.UseNpgsql(connectionString));
 
-// 2. Registrar as Injeções de Dependência (Camadas)
+// 4. Injeção de Dependências (Camadas Core, Infrastructure e Services)
 builder.Services.AddScoped<ITransacaoRepository, TransacaoRepository>();
 builder.Services.AddScoped<ITransacaoService, TransacaoService>();
 
@@ -22,7 +32,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// 3. Configurar o Swagger para Testes
+// 5. Ativa o Swagger para todos os ambientes (para facilitar os testes do PIM III)
 app.UseSwagger();
 app.UseSwaggerUI();
 
