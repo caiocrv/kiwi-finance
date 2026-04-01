@@ -1,2 +1,10 @@
-.env
+# .NET Core
+**/bin/
+**/obj/
+*.user
+*.userosscache
+*.sln.docstates
 .vs
+
+# Variáveis de Ambiente
+.env
