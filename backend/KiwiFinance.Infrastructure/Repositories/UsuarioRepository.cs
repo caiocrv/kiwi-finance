@@ -23,6 +23,7 @@ public class UsuarioRepository : IUsuarioRepository
     public async Task<Usuario?> GetByEmailAsync(string email)
     {
         return await _context.Usuarios
+            .AsNoTracking()
             .FirstOrDefaultAsync(u => u.Email == email);
     }
 

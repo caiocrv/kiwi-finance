@@ -8,6 +8,7 @@ using KiwiFinance.Infrastructure.Repositories;
 using KiwiFinance.Core.Interfaces.Services;
 using KiwiFinance.Services.Services;
 using DotNetEnv;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,7 @@ if (string.IsNullOrEmpty(connectionString) || string.IsNullOrEmpty(jwtSecret))
 }
 
 // 2. Banco de Dados
-builder.Services.AddDbContext<KiwiFinanceContext>(options =>
+builder.Services.AddDbContextPool<KiwiFinanceContext>(options =>
     options.UseNpgsql(connectionString));
 
 // 3. Configuração de Autenticação JWT
@@ -54,7 +55,36 @@ builder.Services.AddScoped<ITransacaoService, TransacaoService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    // Adiciona o botão de "Authorize"
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Insira o token JWT gerado no login."
+    });
+
+    // Diz ao Swagger para usar o token em todos os endpoints trancados
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
+
 
 var app = builder.Build();
 
