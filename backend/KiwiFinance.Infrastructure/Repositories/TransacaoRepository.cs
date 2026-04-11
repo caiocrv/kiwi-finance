@@ -23,6 +23,7 @@ public class TransacaoRepository : ITransacaoRepository
     public async Task<IEnumerable<Transacao>> GetAllByUsuarioAsync(Guid usuarioId)
     {
         return await _context.Transacoes
+            .AsNoTracking()
             .Where(t => t.UsuarioId == usuarioId)
             .ToListAsync();
     }
