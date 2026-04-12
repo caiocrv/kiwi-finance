@@ -4,11 +4,11 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body{
     height: 100vh;
+    width: 100vw;
     background: url('/frontend/assets/images/Login.png') no-repeat center;
     background-size: cover;
     position: relative;
@@ -24,23 +24,113 @@ header{
 
 h3{
     color:#F0F0D8;
-    font-family:'Poppins', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
+    font-family:'Poppins', sans-serif;
 }
 
 .main-login{
     display: flex;
     height: 100vh;
-    flex-direction: column;
 }
 
 .left-login{
+    flex: 1; /* ocupa metade */
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
 
-img{
-    width: 315px;
-    height: 240px;
+.left-login h1{
+    color: #F0F0D8;
+    font-family: 'Aboreto', sans-serif;
+    font-weight: 48;
+    font-size: 48px;
+    align-items: center;
+    text-align: center;
+}
+
+
+.right-login{
+    flex: 1; /* ocupa metade */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 15%;
+}
+
+.right-login h1{
+    color: #604848;
+    font-weight: 600;
+    font-family:'Poppins', sans-serif;
+    font-size: 51px;
+}
+
+input {
+    display: block;
+    margin-top: 3px;
+    width: 230px;
+    height: 40px;
+    border: none;
+    padding: 8px;
+    border-radius: 24px;
+    background: #AAAA74;
+    outline: none;
+    box-sizing: border-box;
+}
+
+input::placeholder{
+    color: #F0F0D8;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+}
+
+label{
+    color: #799048;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+button{
+    margin-top: 50px;
+    border-radius: 24px;
+    border: none;
+    background: #607848;
+    outline: none;
+    cursor: pointer;
+    color: #F0F0D8;
+    height: 30px;
+    width: 230px;
+    height: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+
+button:hover{
+    background: #40552c;
+    transition: 0.3s;
+}
+
+p{
+    text-align: center;
+    margin-top: 10px;
+    color: #799048;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+
+a{
+    text-align: center;
+    margin-top: -8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #C0D860;
 }

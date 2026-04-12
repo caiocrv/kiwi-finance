@@ -18,44 +18,31 @@
 
     <!--AREA DE LOGIN-->
     <main>
-
         <div class="main-login">
-
-            <div class="logo">
-                <img src="/frontend/assets/images/Kiwi.png" alt="Logo-Kiwi">
-             </div>
-
-
-            <div class="left-login">
-                <h1>CONTROLE SUAS FINANÇAS DE FORMA SIMPLES!</h1>
+            <div class="left-login"> <!--LADO ESQUERDO-->
+                <img src="/frontend/assets/images/Kiwi.png" alt="Logo Kiwi"
+                width="315px"
+                height="240px">
+                <h1>CONTROLE SUAS</h1> 
+                <h1>FINANÇAS DE FORMA</h1>
+                <h1>SIMPLES!</h1>
             </div>
 
-            <div class="right-login">
+            <div class="right-login"> <!--LADO DIREITO-->
                 <div class="card-login">
                     <h1>Login</h1>
-
+                    <br>
                     <form action="login" method="post">
-                        <label for="username">Usuário:</label>
+                        <label for="username">Usuário</label>
                         <input type="text" id="username" name="username" placeholder="Nome de usário">
-
-                        <br><br>
-
-                        <label for="password">Senha:</label>
-                        <input type="password" name="password" id="password" placeholder="Senha">
-
-                        <br><br>
-
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" placeholder="Senha">
                         <button type="submit">Acessar Conta</button>
-
-                        <br><br>
-
                         <p>Ainda não tem uma conta?</p>
-                        <a href="/frontend/auth/register.html"> Registrar agora</a>
-
+                        <a href="/frontend/auth/register.html">Registrar agora</a>
                     </form>
                 </div>
             </div>
-
         </div>
 
     </main>
