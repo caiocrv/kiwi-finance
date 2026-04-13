@@ -1,14 +1,97 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   height: 100vh;
   background: url('../assets/images/bg.png') no-repeat center;
   background-size: cover;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  
+}
+
+.header {
+  display: none;
 }
 
 .layout {
   display: flex;
-  height: 100%;
+  flex: 1;
+  justify-content: center;
+  padding: 20px;
+  overflow: hidden; 
 }
+
+.sidebar{
+  background-color: #607848;
+  height: 100%;
+  width: 20%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  
+}
+
+.menu{
+  padding: 20px 0 20px 0;
+  height: 70%;
+  width: 100%;
+  display: flex;
+  margin-top: 45px;
+  flex-direction: column;
+  gap: 15px;
+  
+}
+
+.menu button{
+  font-size: 24px;
+  background-color: #607848;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 10px 0 10px 0 ;
+  border-radius: 6px;
+
+}
+
+.menu button:hover{
+  background-color: #f0f0d8;
+  color: black;
+  transition: 0.4s;
+}
+
+.perfil{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 77px;
+  height: 30%;
+  color: #FFFFFF;
+}
+
+.info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+}
+
+.info h2{
+  font-size: 36px;
+}
+
+.info p{
+  font-size: 24px;
+}
+
+.perfil .logo{
+  width: 80px;
+  margin-bottom: 24px;
+}
+
 
 #app {
   flex: 1;
@@ -18,10 +101,18 @@ body {
 }
 
 .content-wrapper {
-  width: 90%;
-  height: 90%;
+  width: 95%;
+  height: 100%;
   background: rgba(255,255,255,0.2);
   border-radius: 20px;
-  padding: 20px;
   backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 1200px) {
+
+  .sidebar{
+    width: 30%;
+  }
+
 }
