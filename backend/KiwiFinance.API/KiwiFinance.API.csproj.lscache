@@ -33,7 +33,7 @@ TemporaryDependencyNodeTargetIdentifier=net8.0
 /noconfig
 /unsafe-
 /checked-
-/nowarn:1701,1702,1701,1702
+
 /fullpaths
 /nostdlib+
 /errorreport:prompt
@@ -72,7 +72,7 @@ Program.cs
 <NUGET>/
  bcrypt.net-next/4.1.0/lib/netstandard2.1/BCrypt.Net-Next.dll
  dotnetenv/3.1.1/lib/netstandard1.3/DotNetEnv.dll
- microsoft.aspnetcore.app.ref/8.0.24/ref/net8.0/
+
   Microsoft.AspNetCore.Antiforgery.dll
   Microsoft.AspNetCore.Authentication.Abstractions.dll
   Microsoft.AspNetCore.Authentication.BearerToken.dll
@@ -221,7 +221,7 @@ Program.cs
  microsoft.identitymodel.protocols.openidconnect/7.0.3/lib/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
  microsoft.identitymodel.protocols/7.0.3/lib/net8.0/Microsoft.IdentityModel.Protocols.dll
  microsoft.identitymodel.tokens/8.17.0/lib/net8.0/Microsoft.IdentityModel.Tokens.dll
- microsoft.netcore.app.ref/8.0.24/ref/net8.0/
+
   Microsoft.CSharp.dll
   Microsoft.VisualBasic.Core.dll
   Microsoft.VisualBasic.dll
@@ -395,21 +395,7 @@ Program.cs
  system.identitymodel.tokens.jwt/8.17.0/lib/net8.0/System.IdentityModel.Tokens.Jwt.dll
 
 [analyzerReferences]
-../../../Program Files/dotnet/sdk/10.0.103/Sdks/Microsoft.NET.Sdk.Razor/source-generators/
- Microsoft.AspNetCore.Razor.Utilities.Shared.dll
- Microsoft.CodeAnalysis.Razor.Compiler.dll
- Microsoft.Extensions.ObjectPool.dll
-../../../Program Files/dotnet/sdk/10.0.103/Sdks/Microsoft.NET.Sdk.Web/analyzers/cs/
- Microsoft.AspNetCore.Analyzers.dll
- Microsoft.AspNetCore.Mvc.Analyzers.dll
-../../../Program Files/dotnet/sdk/10.0.103/Sdks/Microsoft.NET.Sdk/analyzers/
- Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll
- Microsoft.CodeAnalysis.NetAnalyzers.dll
-<NUGET>/microsoft.aspnetcore.app.ref/8.0.24/analyzers/dotnet/cs/
- Microsoft.AspNetCore.App.Analyzers.dll
- Microsoft.AspNetCore.App.CodeFixes.dll
- Microsoft.AspNetCore.Components.Analyzers.dll
-<NUGET>/microsoft.aspnetcore.app.ref/8.0.24/analyzers/dotnet/roslyn4.4/cs/
+
  Microsoft.Extensions.Logging.Generators.dll
  Microsoft.Extensions.Options.SourceGeneration.dll
 <NUGET>/microsoft.codeanalysis.analyzers/3.3.3/analyzers/dotnet/cs/
@@ -417,7 +403,7 @@ Program.cs
  Microsoft.CodeAnalysis.CSharp.Analyzers.dll
 <NUGET>/
  microsoft.entityframeworkcore.analyzers/8.0.0/analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll
- microsoft.netcore.app.ref/8.0.24/analyzers/dotnet/cs/
+
   Microsoft.Interop.ComInterfaceGenerator.dll
   Microsoft.Interop.JavaScript.JSImportGenerator.dll
   Microsoft.Interop.LibraryImportGenerator.dll
@@ -426,5 +412,5 @@ Program.cs
   System.Text.RegularExpressions.Generator.dll
 
 [analyzerConfigFiles]
-../../../Program Files/dotnet/sdk/10.0.103/Sdks/Microsoft.NET.Sdk/analyzers/build/config/analysislevel_8_default.globalconfig
+
 obj/Debug/net8.0/KiwiFinance.API.GeneratedMSBuildEditorConfig.editorconfig

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KiwiFinance</title>
+    <link rel="icon" href="/frontend/assets/images/Kiwi.png">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <!--LOGO CANTO SUPERIOR ESQUERDO-->
+
+    <header>
+        <div class="Logo">
+            <h3>KiwiFinance</h3>
+        </div>
+    </header>
+
+    <!--AREA DE LOGIN-->
+    <main>
+        <div class="main-login">
+            <div class="left-login"> <!--LADO ESQUERDO-->
+                <img src="/frontend/assets/images/Kiwi.png" alt="Logo Kiwi"
+                width="315px"
+                height="240px">
+                <h1>CONTROLE SUAS</h1> 
+                <h1>FINANÇAS DE FORMA</h1>
+                <h1>SIMPLES!</h1>
+            </div>
+
+            <div class="right-login"> <!--LADO DIREITO-->
+                <div class="card-login">
+                    <h1>Login</h1>
+                    <br>
+                    <form action="login" method="post">
+                        <label for="username">Usuário</label>
+                        <input type="text" id="username" name="username" placeholder="Nome de usário">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" placeholder="Senha">
+                        <button type="submit">Acessar Conta</button>
+                        <p>Ainda não tem uma conta?</p>
+                        <a href="/frontend/auth/register.html">Registrar agora</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
