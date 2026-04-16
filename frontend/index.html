@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KiwiFinance</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/global.css">
@@ -13,63 +13,89 @@
   <link rel="stylesheet" href="css/components/modal.css">
   <link rel="stylesheet" href="css/components/table.css">
   <link rel="shortcut icon" href="assets/images/KiwiFinance.png" type="image/x-icon">
+
+  <script>
+    (function () {
+      var tokenKey = "kiwi_finance_token";
+      var token = localStorage.getItem(tokenKey);
+      localStorage.removeItem("kiwi_finance_user");
+
+      function redirectToLogin() {
+        window.location.replace("auth/login.html");
+      }
+
+      if (!token) {
+        redirectToLogin();
+        return;
+      }
+
+      try {
+        var parts = token.split(".");
+        var payload = parts[1];
+
+        if (!payload) {
+          throw new Error("Token invalido");
+        }
+
+        var normalized = payload.replace(/-/g, "+").replace(/_/g, "/");
+        var padding = (4 - (normalized.length % 4 || 4)) % 4;
+        var padded = normalized + "=".repeat(padding);
+        var data = JSON.parse(atob(padded));
+
+        if (!data.exp || Date.now() >= data.exp * 1000) {
+          localStorage.removeItem(tokenKey);
+          redirectToLogin();
+        }
+      } catch (error) {
+        localStorage.removeItem(tokenKey);
+        redirectToLogin();
+      }
+    })();
+  </script>
 </head>
 
 <body>
 
   <div class="layout">
-
-    <!--SIDEBAR -->
     <aside class="sidebar">
-
-      <!-- PERFIL -->
       <div class="perfil">
         <img src="assets/images/logo.png" alt="Logo" class="logo">
 
         <div class="info">
-          <h2 id="user-name">Nome do Usuário</h2>
-          <p id="user-email">email@email.com</p>
+          <h2 id="user-name">Verificando sessao...</h2>
+          <p id="user-email">JWT protegido</p>
         </div>
       </div>
 
-      <!-- MENU -->
       <nav class="menu">
-        <button onclick="navigate('dashboard')">
-          <img src="/frontend/assets/icons/dashboard.svg" alt="">
+        <button type="button" onclick="navigate('dashboard')">
+          <img src="assets/icons/dashboard.svg" alt="">
           Dashboard
         </button>
 
-        <button onclick="navigate('transacoes')">
-          <img src="/frontend/assets/icons/transacoes.svg" alt="">
-          Transações
+        <button type="button" onclick="navigate('transacoes')">
+          <img src="assets/icons/transacoes.svg" alt="">
+          Transacoes
         </button>
 
-        <button onclick="navigate('config')">
-          <img src="/frontend/assets/icons/configuracoes.svg" alt="">
-          Configurações
+        <button type="button" onclick="navigate('config')">
+          <img src="assets/icons/configuracoes.svg" alt="">
+          Configuracoes
+        </button>
+
+        <button type="button" id="logout-button">
+          Sair
         </button>
       </nav>
-
     </aside>
 
-    <!--CONTEÚDO-->
     <main id="app">
-
-
-      <div class="content-wrapper">
-
-        <!-- conteúdo dinâmico entra aqui -->
-
-      </div>
-
+      <div class="content-wrapper"></div>
     </main>
-
   </div>
 
-  <!-- MODAL -->
   <div id="modal-root"></div>
 
-  <!-- JS -->
   <script type="module" src="js/app.js"></script>
 
 </body>

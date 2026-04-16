@@ -21,6 +21,11 @@ public class AuthService : IAuthService
 
     public async Task<Usuario> RegistrarAsync(Usuario usuario, string senha)
     {
+        var usuarioExistente = await _usuarioRepository.GetByEmailAsync(usuario.Email);
+
+        if (usuarioExistente != null)
+            throw new InvalidOperationException("Ja existe um usuario cadastrado com este e-mail.");
+
         // Criptografa a senha antes de salvar
         usuario.SenhaHash = BCrypt.Net.BCrypt.HashPassword(senha);
 
