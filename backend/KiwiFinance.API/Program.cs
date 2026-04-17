@@ -9,8 +9,10 @@ using KiwiFinance.Core.Interfaces.Services;
 using KiwiFinance.Services.Services;
 using DotNetEnv;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
+var frontendPath = Path.GetFullPath(Path.Combine(builder.Environment.ContentRootPath, "..", "..", "frontend"));
 
 // 1. Carrega as variáveis do .env
 Env.TraversePath().Load();
@@ -26,6 +28,27 @@ if (string.IsNullOrEmpty(connectionString) || string.IsNullOrEmpty(jwtSecret))
 // 2. Banco de Dados
 builder.Services.AddDbContextPool<KiwiFinanceContext>(options =>
     options.UseNpgsql(connectionString));
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Frontend", policy =>
+    {
+        policy
+            .SetIsOriginAllowed(origin =>
+            {
+                if (string.Equals(origin, "null", StringComparison.OrdinalIgnoreCase))
+                    return true;
+
+                if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+                    return false;
+
+                return uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase) ||
+                       uri.Host.Equals("127.0.0.1", StringComparison.OrdinalIgnoreCase);
+            })
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 // 3. Configuração de Autenticação JWT
 builder.Services.AddAuthentication(options =>
@@ -92,6 +115,22 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+if (Directory.Exists(frontendPath))
+{
+    var frontendFileProvider = new PhysicalFileProvider(frontendPath);
+
+    app.UseDefaultFiles(new DefaultFilesOptions
+    {
+        FileProvider = frontendFileProvider
+    });
+
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = frontendFileProvider
+    });
+}
+
+app.UseCors("Frontend");
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KiwiFinance - Login</title>
+    <link rel="icon" href="../assets/images/Kiwi.png">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body data-auth-page="login">
+    <header>
+        <div class="Logo">
+            <h3>KiwiFinance</h3>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-login">
+            <div class="left-login">
+                <img src="../assets/images/Kiwi.png" alt="Logo Kiwi" width="315" height="240">
+                <h1>CONTROLE SUAS</h1>
+                <h1>FINANCAS DE FORMA</h1>
+                <h1>SIMPLES!</h1>
+            </div>
+
+            <div class="right-login">
+                <div class="card-login">
+                    <h1>Login</h1>
+                    <p class="auth-subtitle">Entre com seu e-mail e senha para acessar o KiwiFinance.</p>
+                    <div class="auth-message" id="auth-message" hidden></div>
+
+                    <form data-auth-form novalidate>
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
+
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" placeholder="Sua senha" autocomplete="current-password" required>
+
+                        <button type="submit">Acessar conta</button>
+                        <p>Ainda nao tem uma conta?</p>
+                        <a href="register.html">Registrar agora</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>
