@@ -1,4 +1,4 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -10,7 +10,7 @@ body {
   background-size: cover;
   font-family: 'Poppins', sans-serif;
   display: flex;
-  
+
 }
 
 .header {
@@ -22,19 +22,19 @@ body {
   flex: 1;
   justify-content: center;
   padding: 20px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-.sidebar{
+.sidebar {
   background-color: #607848;
   height: 100%;
   width: 20%;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  
+
 }
 
-.menu{
+.menu {
   padding: 20px 0 20px 0;
   height: 70%;
   width: 100%;
@@ -42,26 +42,26 @@ body {
   margin-top: 45px;
   flex-direction: column;
   gap: 15px;
-  
+
 }
 
-.menu button{
-  font-size: 24px;
+.menu button {
+  font-size: 20px;
   background-color: #607848;
   border: none;
   color: rgba(255, 255, 255, 0.9);
-  padding: 10px 0 10px 0 ;
+  padding: 10px 0 10px 0;
   border-radius: 6px;
 
 }
 
-.menu button:hover{
+.menu button:hover {
   background-color: #f0f0d8;
   color: black;
   transition: 0.4s;
 }
 
-.perfil{
+.perfil {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,7 +71,7 @@ body {
   color: #FFFFFF;
 }
 
-.info{
+.info {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,15 +79,15 @@ body {
   min-width: 300px;
 }
 
-.info h2{
-  font-size: 36px;
-}
-
-.info p{
+.info h2 {
   font-size: 24px;
 }
 
-.perfil .logo{
+.info p {
+  font-size: 18px;
+}
+
+.perfil .logo {
   width: 80px;
   margin-bottom: 24px;
 }
@@ -103,7 +103,7 @@ body {
 .content-wrapper {
   width: 95%;
   height: 100%;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -111,8 +111,196 @@ body {
 
 @media (max-width: 1200px) {
 
-  .sidebar{
+  .sidebar {
     width: 30%;
   }
 
+}
+
+@media (max-width: 1000px) {
+
+  .layout {
+    flex-direction: column;
+    gap: 0;
+
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #607848;
+    color: #F0F0D8;
+    border-radius: 12px;
+    height: 10%;
+  }
+
+  .logo_header {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-right: 15px;
+  }
+
+  .logo_header h2 {
+    font-size: 24px;
+  }
+
+  .logo_header img {
+    width: 90px;
+    margin-right: -20px;
+  }
+
+  .menu-toggle {
+    background-color: #38452A;
+    padding: 2px 4px 2px 4px;
+    border: none;
+    border-radius: 4px;
+    color: #F0F0D8;
+  }
+
+  .menu-toggle:hover {
+    background-color: #c9f39c;
+    cursor: pointer;
+    color: #272722;
+    transition: 0.5s;
+  }
+
+  .menu button {
+    font-size: 18px;
+  }
+
+  .perfil .logo {
+    width: 70px;
+    margin-bottom: 24px;
+  }
+
+  .content-wrapper {
+    width: 100%;
+    height: 90%;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 40%;
+    height: 100vh;
+    z-index: 1000;
+    transition: 0.3s;
+    border-radius: 0;
+    display: block;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+  }
+
+  .overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .logo_header {
+    margin-top: 15px;
+    margin-right: 5px;
+  }
+
+  .logo_header h2 {
+    font-size: 20px;
+  }
+
+  .logo_header img {
+    width: 70px;
+  }
+
+  .info h2 {
+    font-size: 20px;
+  }
+
+  .info p {
+    font-size: 16px;
+  }
+
+  .menu button {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .info h2 {
+    font-size: 16px;
+  }
+
+  .info p {
+    font-size: 12px;
+  }
+
+  .menu button {
+    font-size: 14px;
+  }
+
+}
+
+@media (max-width: 426px) {
+
+  .logo_header {
+    margin-top: 10px;
+    margin-right: 5px;
+  }
+
+  .logo_header h2 {
+    font-size: 18px;
+  }
+
+  .logo_header img {
+    width: 70px;
+  }
+
+  .perfil .logo {
+    width: 50px;
+    margin-bottom: 24px;
+  }
+
+  .info h2 {
+    font-size: 14px;
+  }
+
+  .info p {
+    font-size: 12px;
+  }
+
+  .menu {
+  padding: 20px 0 20px 0;
+  margin-top: 20px;
+  
+
+  }
+
+  .menu button {
+    font-size: 12px;
+  }
+
+  .menu img{
+    width: 14px;
+  }
 }

@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KiwiFinance</title>
 
   <!-- CSS -->
@@ -12,12 +13,20 @@
   <link rel="stylesheet" href="css/components/sidebar.css">
   <link rel="stylesheet" href="css/components/modal.css">
   <link rel="stylesheet" href="css/components/table.css">
-  <link rel="shortcut icon" href="assets/images/KiwiFinance.png" type="image/x-icon">
+  <link rel="icon" href="assets/icons/icon_kiwi.svg" type=" image/x-icon">
 </head>
 
 <body>
 
   <div class="layout">
+
+    <header class="header">
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <div class="logo_header">
+        <img src="/frontend/assets/icons/icon_kiwi.svg" alt="">
+        <h2>KiwiFinance</h2>
+      </div>
+    </header>
 
     <!--SIDEBAR -->
     <aside class="sidebar">
@@ -64,12 +73,14 @@
 
     </main>
 
+    <div class="overlay" onclick="toggleMenu()"></div>
+
   </div>
 
-  <!-- MODAL -->
+
   <div id="modal-root"></div>
 
-  <!-- JS -->
+
   <script type="module" src="js/app.js"></script>
 
 </body>
