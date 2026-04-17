@@ -1,4 +1,5 @@
 import { toggleMenu } from './components/sidebar.js';
+import './components/transacoes.js';
 
 window.toggleMenu = toggleMenu;
 
@@ -12,4 +13,3 @@ function loadUser() {
   document.getElementById("user-name").textContent = user.nome;
   document.getElementById("user-email").textContent = user.email;
 }
-
