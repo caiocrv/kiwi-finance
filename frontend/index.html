@@ -12,51 +12,22 @@
   <link rel="stylesheet" href="css/components/sidebar.css">
   <link rel="stylesheet" href="css/components/modal.css">
   <link rel="stylesheet" href="css/components/table.css">
-  <link rel="shortcut icon" href="assets/images/KiwiFinance.png" type="image/x-icon">
-
-  <script>
-    (function () {
-      var tokenKey = "kiwi_finance_token";
-      var token = localStorage.getItem(tokenKey);
-      localStorage.removeItem("kiwi_finance_user");
-
-      function redirectToLogin() {
-        window.location.replace("auth/login.html");
-      }
-
-      if (!token) {
-        redirectToLogin();
-        return;
-      }
-
-      try {
-        var parts = token.split(".");
-        var payload = parts[1];
-
-        if (!payload) {
-          throw new Error("Token invalido");
-        }
-
-        var normalized = payload.replace(/-/g, "+").replace(/_/g, "/");
-        var padding = (4 - (normalized.length % 4 || 4)) % 4;
-        var padded = normalized + "=".repeat(padding);
-        var data = JSON.parse(atob(padded));
-
-        if (!data.exp || Date.now() >= data.exp * 1000) {
-          localStorage.removeItem(tokenKey);
-          redirectToLogin();
-        }
-      } catch (error) {
-        localStorage.removeItem(tokenKey);
-        redirectToLogin();
-      }
-    })();
-  </script>
+  <link rel="icon" href="assets/icons/icon_kiwi.svg" type=" image/x-icon">
 </head>
 
 <body>
 
   <div class="layout">
+
+    <header class="header">
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <div class="logo_header">
+        <img src="/frontend/assets/icons/icon_kiwi.svg" alt="">
+        <h2>KiwiFinance</h2>
+      </div>
+    </header>
+
+    <!--SIDEBAR -->
     <aside class="sidebar">
       <div class="perfil">
         <img src="assets/images/logo.png" alt="Logo" class="logo">
@@ -92,9 +63,14 @@
     <main id="app">
       <div class="content-wrapper"></div>
     </main>
+
+    <div class="overlay" onclick="toggleMenu()"></div>
+
   </div>
 
+
   <div id="modal-root"></div>
+
 
   <script type="module" src="js/app.js"></script>
 
