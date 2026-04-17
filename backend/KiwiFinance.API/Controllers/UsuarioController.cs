@@ -1,7 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
-using KiwiFinance.Core.Entities;
+using System.Security.Claims;
 using KiwiFinance.Core.DTOs;
+using KiwiFinance.Core.Entities;
 using KiwiFinance.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KiwiFinance.API.Controllers;
 
@@ -17,10 +19,32 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPost("registrar")]
-    public async Task<IActionResult> Registrar([FromBody] Usuario usuario, [FromQuery] string senha)
+    public async Task<IActionResult> Registrar([FromBody] RegisterRequest request)
     {
-        var novoUsuario = await _authService.RegistrarAsync(usuario, senha);
-        return Ok(new { mensagem = "Usuário cadastrado com sucesso!", id = novoUsuario.Id });
+        if (string.IsNullOrWhiteSpace(request.Nome) ||
+            string.IsNullOrWhiteSpace(request.Email) ||
+            string.IsNullOrWhiteSpace(request.Senha))
+        {
+            return BadRequest(new { mensagem = "Nome, e-mail e senha sao obrigatorios." });
+        }
+
+        var usuario = new Usuario
+        {
+            Nome = request.Nome.Trim(),
+            Email = request.Email.Trim(),
+            Telefone = request.Telefone.Trim(),
+            Cpf = request.Cpf.Trim()
+        };
+
+        try
+        {
+            var novoUsuario = await _authService.RegistrarAsync(usuario, request.Senha);
+            return Ok(new { mensagem = "Usuario cadastrado com sucesso!" });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { mensagem = ex.Message });
+        }
     }
 
     [HttpPost("login")]
@@ -29,8 +53,39 @@ public class UsuarioController : ControllerBase
         var token = await _authService.LoginAsync(request);
 
         if (token == null)
-            return Unauthorized(new { mensagem = "E-mail ou senha inválidos." });
+            return Unauthorized(new { mensagem = "E-mail ou senha invalidos." });
 
         return Ok(new { token });
+    }
+
+    [Authorize]
+    [HttpGet("sessao")]
+    public IActionResult ValidarSessao()
+    {
+        return NoContent();
+    }
+
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        Response.Cookies.Delete("kiwi_finance_auth");
+        return Ok(new { mensagem = "Sessao encerrada com sucesso." });
+    }
+
+    [Authorize]
+    [HttpGet("me")]
+    public IActionResult Me()
+    {
+        var nome = User.FindFirstValue(ClaimTypes.Name);
+
+        if (string.IsNullOrWhiteSpace(nome))
+            return Unauthorized(new { mensagem = "Token de autenticacao sem dados do usuario." });
+
+        var response = new UsuarioAutenticadoResponse
+        {
+            Nome = nome
+        };
+
+        return Ok(response);
     }
 }

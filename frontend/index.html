@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KiwiFinance</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/global.css">
@@ -30,39 +29,39 @@
 
     <!--SIDEBAR -->
     <aside class="sidebar">
-
-      <!-- PERFIL -->
       <div class="perfil">
         <img src="assets/images/logo.png" alt="Logo" class="logo">
 
         <div class="info">
-          <h2 id="user-name">Nome do Usuário</h2>
-          <p id="user-email">email@email.com</p>
+          <h2 id="user-name">Verificando sessao...</h2>
+          <p id="user-email">JWT protegido</p>
         </div>
       </div>
 
-      <!-- MENU -->
       <nav class="menu">
-        <button onclick="navigate('dashboard')">
-          <img src="/frontend/assets/icons/dashboard.svg" alt="">
+        <button type="button" onclick="navigate('dashboard')">
+          <img src="assets/icons/dashboard.svg" alt="">
           Dashboard
         </button>
 
-        <button onclick="navigate('transacoes')">
-          <img src="/frontend/assets/icons/transacoes.svg" alt="">
-          Transações
+        <button type="button" onclick="navigate('transacoes')">
+          <img src="assets/icons/transacoes.svg" alt="">
+          Transacoes
         </button>
 
-        <button onclick="navigate('config')">
-          <img src="/frontend/assets/icons/configuracoes.svg" alt="">
-          Configurações
+        <button type="button" onclick="navigate('config')">
+          <img src="assets/icons/configuracoes.svg" alt="">
+          Configuracoes
+        </button>
+
+        <button type="button" id="logout-button">
+          Sair
         </button>
       </nav>
-
     </aside>
 
-    <!--CONTEÚDO-->
     <main id="app">
+<<<<<<< HEAD
 
 
       <div class="content-wrapper" id="conteudo">
@@ -71,6 +70,9 @@
 
       </div>
 
+=======
+      <div class="content-wrapper"></div>
+>>>>>>> 868b8c2074a40349b4ab69a25fe2c4c55876d489
     </main>
 
     <div class="overlay" onclick="toggleMenu()"></div>

@@ -109,6 +109,28 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
+.app-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 40px;
+  color: #FFFFFF;
+}
+
+.app-view h1 {
+  font-size: 40px;
+}
+
+.app-view p {
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+#logout-button {
+  margin-top: auto;
+}
+
 @media (max-width: 1200px) {
 
   .sidebar {
