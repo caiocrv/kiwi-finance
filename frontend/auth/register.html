@@ -3,60 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KiwiFinance - Cadastro</title>
-    <link rel="icon" href="../assets/images/Kiwi.png">
-    <link rel="stylesheet" href="css/auth.css">
+    <title>Cadastro</title>
+    <link rel="icon" href="/frontend/assets/images/Kiwi.png">
+    <link rel="stylesheet" href="/frontend/auth/css/register.css">
 </head>
-<body data-auth-page="register">
-    <header>
-        <div class="Logo">
-            <h3>KiwiFinance</h3>
-        </div>
+<body>
+    <header class="icon">
+        <img src="/frontend/assets/images/Kiwi.png" alt="iconkiwi"
+        width="90px"
+        height="70px">
+        <h1>KiwiFinance</h1>
     </header>
 
     <main>
-        <div class="main-login">
-            <div class="left-login">
-                <img src="../assets/images/Kiwi.png" alt="Logo Kiwi" width="315" height="240">
-                <h1>CRIE SUA CONTA</h1>
-                <h1>E COMECE A</h1>
-                <h1>ORGANIZAR TUDO</h1>
-            </div>
-
-            <div class="right-login">
-                <div class="card-login">
-                    <h1>Cadastro</h1>
-                    <p class="auth-subtitle">Preencha seus dados para acessar o KiwiFinance.</p>
-                    <div class="auth-message" id="auth-message" hidden></div>
-
-                    <form data-auth-form novalidate>
-                        <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" placeholder="Seu nome" autocomplete="name" required>
-
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
-
-                        <label for="telefone">Telefone</label>
-                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
-
-                        <label for="cpf">CPF</label>
-                        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" autocomplete="off">
-
-                        <label for="password">Senha</label>
-                        <input type="password" id="password" name="password" placeholder="Crie uma senha" autocomplete="new-password" required>
-
-                        <label for="confirmPassword">Confirmar senha</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repita a senha" autocomplete="new-password" required>
-
-                        <button type="submit">Criar conta</button>
-                        <p>Ja tem uma conta?</p>
-                        <a href="login.html">Entrar agora</a>
-                    </form>
-                </div>
-            </div>
+        <div class="Titulo">
+            <h1>Cadastro</h1>
         </div>
-    </main>
+        
+        <form action="register" method="post" class=" form-container">
+            <div class="input-group">
+                <label for="username">Nome</label>
+                <input type="text" name="username" id="username" placeholder="Nome de usuário">
+            </div>
 
-    <script type="module" src="js/auth.js"></script>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" placeholder="Email">
+            </div>
+
+            <div class="input-group">
+                <label for="CPF">CPF</label>
+                <input type="text" name="CPF" id="CPF" placeholder="CPF">
+            </div>
+
+            <div class="input-group">
+                <label for="numero">Número</label>
+                <input type="text" name="numero" id="numero" placeholder="Número">
+            </div>
+
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" name="password" id="password" placeholder="Senha">
+            </div>
+
+            <div class="input-group">
+                <label for="password">Confirme a senha</label>
+                <input type="password" name="password" id="password" placeholder="Confirme sua senha">
+            </div>
+
+        </form>
+        <div class="btn">
+            <button type="submit">Criar conta</button>
+            <p>Junte-se a nós</p>
+        </div>
+
+    </main>
 </body>
 </html>
