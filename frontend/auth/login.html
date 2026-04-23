@@ -6,45 +6,44 @@
     <title>KiwiFinance</title> 
     <link rel="stylesheet" href="css/auth.css">
 </head>
-<body>
-    <!--LOGO CANTO SUPERIOR ESQUERDO-->
-
+<body data-auth-page="login">
     <header>
         <div class="Logo">
             <h3>KiwiFinance</h3>
         </div>
     </header>
 
-    <!--AREA DE LOGIN-->
     <main>
         <div class="main-login">
-            <div class="left-login"> <!--LADO ESQUERDO-->
-                <img src="/frontend/assets/images/Kiwi.png" alt="Logo Kiwi"
-                width="315px"
-                height="240px">
-                <h1>CONTROLE SUAS</h1> 
-                <h1>FINANÇAS DE FORMA</h1>
+            <div class="left-login">
+                <img src="../assets/images/Kiwi.png" alt="Logo Kiwi" width="315" height="240">
+                <h1>CONTROLE SUAS</h1>
+                <h1>FINANCAS DE FORMA</h1>
                 <h1>SIMPLES!</h1>
             </div>
 
-            <div class="right-login"> <!--LADO DIREITO-->
+            <div class="right-login">
                 <div class="card-login">
                     <h1>Login</h1>
-                    <br>
-                    <form action="login" method="post">
-                        <label for="username">Usuário</label>
-                        <input type="text" id="username" name="username" placeholder="Nome de usário">
+                    <p class="auth-subtitle">Entre com seu e-mail e senha para acessar o KiwiFinance.</p>
+                    <div class="auth-message" id="auth-message" hidden></div>
+
+                    <form data-auth-form novalidate>
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
+
                         <label for="password">Senha</label>
-                        <input type="password" id="password" name="password" placeholder="Senha">
-                        <button type="submit">Acessar Conta</button>
-                        <p>Ainda não tem uma conta?</p>
-                        <a href="/frontend/auth/register.html">Registrar agora</a>
+                        <input type="password" id="password" name="password" placeholder="Sua senha" autocomplete="current-password" required>
+
+                        <button type="submit">Acessar conta</button>
+                        <p>Ainda nao tem uma conta?</p>
+                        <a href="register.html">Registrar agora</a>
                     </form>
                 </div>
             </div>
         </div>
-
     </main>
 
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>
