@@ -1,5 +1,4 @@
 import {
-  getLoginUrl,
   login,
   redirectIfAuthenticated,
   redirectToIndex,
@@ -11,10 +10,13 @@ redirectIfAuthenticated();
 const authPage = document.body.dataset.authPage;
 const form = document.querySelector("[data-auth-form]");
 const messageElement = document.getElementById("auth-message");
-const submitButton = form?.querySelector("button[type='submit']");
+const submitButton =
+  form?.querySelector("button[type='submit']") ||
+  document.querySelector("[data-auth-submit]");
 
 function showMessage(message, type = "error") {
   if (!messageElement) {
+    window.alert(message);
     return;
   }
 
@@ -48,11 +50,6 @@ function setSubmitting(isSubmitting) {
   submitButton.textContent = isSubmitting ? "Entrando..." : "Acessar conta";
 }
 
-function getQueryParam(name) {
-  const params = new URLSearchParams(window.location.search);
-  return params.get(name);
-}
-
 async function handleLoginSubmit(event) {
   event.preventDefault();
   clearMessage();
@@ -81,12 +78,13 @@ async function handleRegisterSubmit(event) {
   event.preventDefault();
   clearMessage();
 
-  const nome = form.nome.value.trim();
-  const email = form.email.value.trim();
-  const telefone = form.telefone.value.trim();
-  const cpf = form.cpf.value.trim();
-  const senha = form.password.value;
-  const confirmarSenha = form.confirmPassword.value;
+  const formData = new FormData(form);
+  const nome = `${formData.get("nome") || ""}`.trim();
+  const email = `${formData.get("email") || ""}`.trim();
+  const telefone = `${formData.get("telefone") || ""}`.trim();
+  const cpf = `${formData.get("cpf") || ""}`.trim();
+  const senha = `${formData.get("password") || ""}`;
+  const confirmarSenha = `${formData.get("confirmPassword") || ""}`;
 
   if (!nome || !email || !senha) {
     showMessage("Nome, e-mail e senha sao obrigatorios.");
@@ -102,16 +100,12 @@ async function handleRegisterSubmit(event) {
 
   try {
     await register({ nome, email, senha, telefone, cpf });
-    window.location.replace(`${getLoginUrl()}?registered=1`);
+    window.location.replace("./login.html");
   } catch (error) {
     showMessage(error.message || "Nao foi possivel criar a conta.");
   } finally {
     setSubmitting(false);
   }
-}
-
-if (authPage === "login" && getQueryParam("registered") === "1") {
-  showMessage("Conta criada com sucesso. Entre para continuar.", "success");
 }
 
 if (form) {

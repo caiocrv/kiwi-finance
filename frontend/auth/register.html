@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="icon" href="/frontend/assets/images/Kiwi.png">
-    <link rel="stylesheet" href="/frontend/auth/css/register.css">
+    <link rel="icon" href="../assets/images/Kiwi.png">
+    <link rel="stylesheet" href="css/register.css">
 </head>
-<body>
+<body data-auth-page="register">
     <header class="icon">
-        <img src="/frontend/assets/images/Kiwi.png" alt="iconkiwi"
+        <img src="../assets/images/Kiwi.png" alt="iconkiwi"
         width="90px"
         height="70px">
         <h1>KiwiFinance</h1>
@@ -20,43 +20,45 @@
             <h1>Cadastro</h1>
         </div>
         
-        <form action="register" method="post" class=" form-container">
+        <form action="register" method="post" class=" form-container" id="register-form" data-auth-form novalidate>
             <div class="input-group">
-                <label for="username">Nome</label>
-                <input type="text" name="username" id="username" placeholder="Nome de usuário">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" placeholder="Nome de usuario" autocomplete="name" required>
             </div>
 
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" placeholder="Email">
+                <input type="email" name="email" id="email" placeholder="Email" autocomplete="email" required>
             </div>
 
             <div class="input-group">
-                <label for="CPF">CPF</label>
-                <input type="text" name="CPF" id="CPF" placeholder="CPF">
+                <label for="cpf">CPF</label>
+                <input type="text" name="cpf" id="cpf" placeholder="CPF">
             </div>
 
             <div class="input-group">
-                <label for="numero">Número</label>
-                <input type="text" name="numero" id="numero" placeholder="Número">
+                <label for="telefone">Numero</label>
+                <input type="text" name="telefone" id="telefone" placeholder="Numero" autocomplete="tel">
             </div>
 
             <div class="input-group">
                 <label for="password">Senha</label>
-                <input type="password" name="password" id="password" placeholder="Senha">
+                <input type="password" name="password" id="password" placeholder="Senha" autocomplete="new-password" required>
             </div>
 
             <div class="input-group">
-                <label for="password">Confirme a senha</label>
-                <input type="password" name="password" id="password" placeholder="Confirme sua senha">
+                <label for="confirmPassword">Confirme a senha</label>
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirme sua senha" autocomplete="new-password" required>
             </div>
 
         </form>
         <div class="btn">
-            <button type="submit">Criar conta</button>
-            <p>Junte-se a nós</p>
+            <button type="submit" form="register-form" data-auth-submit>Criar conta</button>
+            <p>Junte-se a nos</p>
         </div>
 
     </main>
+
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>
