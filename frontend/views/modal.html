@@ -1,0 +1,49 @@
+<header class="modal-header">
+    <div class="titulo-header">
+        <h2>Nova Transação</h2>
+        <p>adicionar transação manualmente</p>
+    </div>
+    <button class="fechar-modal"><img src="/frontend/assets/icons/close-page.svg" alt=""></button>
+</header>
+
+<form class="modal-form">
+    <div class="campos-transacao">
+        <h3>Tipo</h3>
+        <div class="tipo-transacao">
+            <button>Receita</button>
+            <button>Despesa</button>
+        </div>
+    </div>
+
+    <div class="campos-transacao">
+        <h3>Categoria</h3>
+        <select name="Categoria" id="categoria">
+            <option value="Salário">Salário</option>
+            <option value="Investimento">Investimento</option>
+            <option value="Aluguel">Aluguel</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Hospedagem">Hospedagem</option>
+            <option value="Automotivo">Automotivo</option>
+        </select>
+    </div>
+
+    <div class="campos-transacao">
+        <h3>Descrição</h3>
+        <input type="text" placeholder="Descrição">
+    </div>
+
+    <div class="campos-transacao">
+        <h3>Valor</h3>
+        <input type="number" placeholder="R$0,00">
+    </div>
+
+    <div class="campos-transacao">
+        <h3>Data</h3>
+        <input type="datetime" placeholder="00/00/0000">
+    </div>
+
+</form>
+
+<div class="btn-registro">
+    <button type="submit">Registrar Transação</button>
+</div>

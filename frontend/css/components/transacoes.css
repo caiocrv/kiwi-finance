@@ -1,0 +1,370 @@
+.transacoes-page {
+    box-sizing: border-box;
+    padding: 60px;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    /* height: 100%; */
+    flex: 1;
+    min-height: 0;
+
+}
+
+.page-title {
+    font-size: 48px;
+    font-weight: 100;
+    margin-bottom: 32px;
+}
+
+.actions-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 21px;
+}
+
+.filtros {
+    display: flex;
+    gap: 20px;
+}
+
+.input-busca {
+    background-color: #F0F0D8;
+    border: none;
+}
+
+.input-container {
+    padding: 6px;
+    background-color: #F0F0D8;
+    border: none;
+    border-radius: 8px;
+}
+
+.filtro-container {
+    position: relative;
+}
+
+.filtro-opcoes {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    list-style: none;
+    background-color: #dcdcc6;
+    width: 140px;
+    font-size: 14px;
+    padding: 6px;
+    border-radius: 6px;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.filtro-opcoes li {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.filtro-opcoes li:hover {
+    background-color: #F0F0D8;
+}
+
+.filtro-opcoes.active {
+    display: flex;
+}
+
+.filtro-btn {
+    padding: 8px;
+    background-color: #F0F0D8;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.btn-nova-transacao {
+    padding: 8px 20px 8px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    background-color: #679800;
+    color: #FFFFFF;
+}
+
+.btn-nova-transacao:active {
+    transform: scale(0.98);
+}
+
+.card-transacoes {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    background-color: #F0F0D8;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    margin: 12px 22px 12px 22px;
+    flex-shrink: 0;
+}
+
+.table-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-title h2 {
+    font-size: 24px;
+}
+
+.resumo-transacoes {
+    margin-top: 18px;
+    display: flex;
+    margin-left: auto;
+    gap: 16px;
+}
+
+.tabela-transacoes {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.table-header {
+    position: sticky;
+    top: 0;
+    background-color: #dcdcc6;
+    z-index: 1;
+}
+
+.table-header tr {
+    display: flex;
+    padding: 8px;
+    font-size: 16px;
+    justify-content: space-between;
+    color: rgba(0, 0, 0, 0.6);
+    border-top: 0.5px solid rgba(0, 0, 0, 0.4);
+}
+
+.lista-transacoes {
+
+    font-size: 16px;
+    padding: 12px;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.4);
+
+}
+
+.lista-transacoes tr {
+    display: flex;
+    justify-content: space-between;
+}
+
+tr {
+    display: flex;
+}
+
+@media (max-width: 1100px) {
+    .card-title h2 {
+        font-size: 20px;
+    }
+
+}
+
+@media (max-width: 1000px) {
+    .transacoes-page {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .actions-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 21px;
+    }
+
+    .filtros {
+        width: 100%;
+        gap: 0;
+        justify-content: space-between;
+    }
+
+    .btn-nova-transacao {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .transacoes-page {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .page-title {
+        font-size: 35px;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .transacoes-page {
+        padding: 20px;
+    }
+
+    .actions-bar {
+        margin-bottom: 15px;
+    }
+
+    .filtro-btn {
+        padding: 6px;
+        font-size: 10px;
+    }
+
+    .filtro-opcoes {
+        width: 107px;
+        font-size: 10px;
+        padding: 6px;
+        border-radius: 6px;
+        gap: 8px;
+    }
+
+    .input-container {
+        padding: 3px;
+        background-color: #F0F0D8;
+        border: none;
+        border-radius: 6px;
+    }
+
+    .input-busca {
+        font-size: 10px
+    }
+
+    .filtros {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .btn-nova-transacao {
+        padding: 4px 20px 4px 20px;
+    }
+
+    .card-transacoes {
+        border-radius: 20px;
+    }
+
+    .card-header {
+        display: flex;
+        flex-direction: column;
+        margin: 12px 22px 12px 22px;
+        flex-shrink: 0;
+    }
+
+    .table-container {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .card-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .card-title h2 {
+        font-size: 20px;
+    }
+
+    .resumo-transacoes {
+        margin-top: 18px;
+        display: flex;
+        margin-left: auto;
+        gap: 10px;
+    }
+
+    .resumo-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        font-size: 12px;
+    }
+
+    .resumo-item img {
+        width: 12px;
+    }
+
+    .table-header tr {
+        padding: 4px;
+        font-size: 12px;
+    }
+
+    .lista-transacoes {
+        font-size: 10px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 350px) {
+
+    .card-header{
+        margin: 15px 12px 15px 12px;
+    }
+
+    .card-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .card-title h2 {
+        font-size: 16px;
+    }
+
+    .resumo-transacoes {
+        margin-top: 18px;
+        display: flex;
+        margin-right: auto;
+        gap: 8px;
+        margin: 15px 0 0 0;
+    }
+
+    .resumo-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        font-size: 10px;
+    }
+
+    .resumo-item img {
+        width: 10px;
+    }
+
+    .table-header tr {
+        padding: 4px;
+        font-size: 12px;
+    }
+
+    .lista-transacoes {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+}
