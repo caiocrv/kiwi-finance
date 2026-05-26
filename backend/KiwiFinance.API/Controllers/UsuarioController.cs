@@ -19,11 +19,11 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPost("registrar")]
-    public async Task<IActionResult> Registrar([FromBody] RegisterRequest request)
+    public async Task<IActionResult> Registrar([FromBody] RegisterRequest request, [FromQuery] string senha)
     {
         if (string.IsNullOrWhiteSpace(request.Nome) ||
             string.IsNullOrWhiteSpace(request.Email) ||
-            string.IsNullOrWhiteSpace(request.Senha))
+            string.IsNullOrWhiteSpace(senha))
         {
             return BadRequest(new { mensagem = "Nome, e-mail e senha sao obrigatorios." });
         }
@@ -32,13 +32,13 @@ public class UsuarioController : ControllerBase
         {
             Nome = request.Nome.Trim(),
             Email = request.Email.Trim(),
-            Telefone = request.Telefone.Trim(),
-            Cpf = request.Cpf.Trim()
+            Telefone = request.Telefone?.Trim() ?? string.Empty,
+            Cpf = request.Cpf?.Trim() ?? string.Empty
         };
 
         try
         {
-            var novoUsuario = await _authService.RegistrarAsync(usuario, request.Senha);
+            var novoUsuario = await _authService.RegistrarAsync(usuario, senha.Trim());
             return Ok(new { mensagem = "Usuario cadastrado com sucesso!" });
         }
         catch (InvalidOperationException ex)

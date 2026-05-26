@@ -13,6 +13,7 @@ using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 var frontendPath = Path.GetFullPath(Path.Combine(builder.Environment.ContentRootPath, "..", "..", "frontend"));
+var allowedLocalHosts = new[] { "localhost", "127.0.0.1" };
 
 // 1. Carrega as variáveis do .env
 Env.TraversePath().Load();
@@ -42,8 +43,10 @@ builder.Services.AddCors(options =>
                 if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
                     return false;
 
-                return uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase) ||
-                       uri.Host.Equals("127.0.0.1", StringComparison.OrdinalIgnoreCase);
+                return Array.Exists(
+                    allowedLocalHosts,
+                    host => uri.Host.Equals(host, StringComparison.OrdinalIgnoreCase)
+                );
             })
             .AllowAnyHeader()
             .AllowAnyMethod();
@@ -127,6 +130,12 @@ if (Directory.Exists(frontendPath))
     app.UseStaticFiles(new StaticFileOptions
     {
         FileProvider = frontendFileProvider
+    });
+
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = frontendFileProvider,
+        RequestPath = "/frontend"
     });
 }
 

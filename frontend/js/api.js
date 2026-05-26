@@ -1,25 +1,14 @@
-const AUTH_TOKEN_STORAGE_KEY = "kiwi_finance_token";
-const DEFAULT_API_BASE_URL =
-  window.location.protocol === "file:" ? "http://localhost:5000" : window.location.origin;
+const AUTH_TOKEN_STORAGE_KEY = "kiwi_token";
+const LEGACY_AUTH_TOKEN_STORAGE_KEY = "kiwi_finance_token";
+const API_BASE_URL = "http://localhost:5000";
+const nativeFetch = window.fetch.bind(window);
+let authFetchInstalled = false;
 
 removeLegacySensitiveData();
 
-function getConfiguredApiBaseUrl() {
-  const configuredUrl =
-    window.KIWI_API_URL || localStorage.getItem("kiwi_finance_api_url");
-
-  return (configuredUrl || DEFAULT_API_BASE_URL).replace(/\/+$/, "");
-}
-
 function buildApiUrl(path) {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  return `${getConfiguredApiBaseUrl()}${normalizedPath}`;
-}
-
-function decodeBase64Url(segment) {
-  const normalized = segment.replace(/-/g, "+").replace(/_/g, "/");
-  const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, "=");
-  return atob(padded);
+  return `${API_BASE_URL}${normalizedPath}`;
 }
 
 async function parseResponse(response) {
@@ -58,38 +47,47 @@ function isAuthPage() {
   return window.location.pathname.includes("/auth/");
 }
 
-async function request(path, options = {}) {
-  const headers = new Headers(options.headers || {});
+function createHeaders(headersInit = undefined) {
+  return new Headers(headersInit || {});
+}
+
+function appendAuthorization(headers) {
   const token = getAuthToken();
 
-  if (options.body && !(options.body instanceof FormData) && !headers.has("Content-Type")) {
-    headers.set("Content-Type", "application/json");
-  }
-
-  if (token) {
+  if (token && !headers.has("Authorization")) {
     headers.set("Authorization", `Bearer ${token}`);
   }
 
-  const response = await fetch(buildApiUrl(path), {
-    ...options,
-    headers
-  });
+  return headers;
+}
 
-  const data = await parseResponse(response);
-
-  if (response.status === 401) {
-    clearSession();
+function extractToken(data) {
+  if (typeof data === "string" && data.trim()) {
+    return data.trim();
   }
 
-  return { response, data };
+  if (data && typeof data === "object" && typeof data.token === "string") {
+    return data.token.trim();
+  }
+
+  return "";
 }
 
 export function getApiBaseUrl() {
-  return getConfiguredApiBaseUrl();
+  return API_BASE_URL;
 }
 
 export function getAuthToken() {
-  return localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
+  const token =
+    localStorage.getItem(AUTH_TOKEN_STORAGE_KEY) ||
+    localStorage.getItem(LEGACY_AUTH_TOKEN_STORAGE_KEY);
+
+  if (token && localStorage.getItem(AUTH_TOKEN_STORAGE_KEY) !== token) {
+    localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, token);
+    localStorage.removeItem(LEGACY_AUTH_TOKEN_STORAGE_KEY);
+  }
+
+  return token;
 }
 
 export function removeLegacySensitiveData() {
@@ -103,53 +101,17 @@ export function saveSession(token) {
   }
 
   localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, token);
+  localStorage.removeItem(LEGACY_AUTH_TOKEN_STORAGE_KEY);
 }
 
 export function clearSession() {
   localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
+  localStorage.removeItem(LEGACY_AUTH_TOKEN_STORAGE_KEY);
   removeLegacySensitiveData();
-}
-
-export function parseJwt(token) {
-  if (!token) {
-    return null;
-  }
-
-  const [, payload] = token.split(".");
-
-  if (!payload) {
-    return null;
-  }
-
-  try {
-    return JSON.parse(decodeBase64Url(payload));
-  } catch {
-    return null;
-  }
-}
-
-export function isTokenExpired(token = getAuthToken()) {
-  const payload = parseJwt(token);
-
-  if (!payload || typeof payload.exp !== "number") {
-    return true;
-  }
-
-  return Date.now() >= payload.exp * 1000;
-}
-
-export function isAuthenticated() {
-  const token = getAuthToken();
-  return Boolean(token) && !isTokenExpired(token);
 }
 
 export function getLoginUrl() {
   const relativePath = isAuthPage() ? "./login.html" : "./auth/login.html";
-  return new URL(relativePath, window.location.href).href;
-}
-
-export function getRegisterUrl() {
-  const relativePath = isAuthPage() ? "./register.html" : "./auth/register.html";
   return new URL(relativePath, window.location.href).href;
 }
 
@@ -167,30 +129,79 @@ export function redirectToIndex() {
 }
 
 export function redirectIfAuthenticated() {
-  if (isAuthenticated()) {
+  if (getAuthToken()) {
     redirectToIndex();
   }
 }
 
+export function requireAuthentication() {
+  const token = getAuthToken();
+
+  if (!token) {
+    redirectToLogin();
+    return null;
+  }
+
+  installAuthenticatedFetch();
+  return token;
+}
+
+export function installAuthenticatedFetch() {
+  if (authFetchInstalled) {
+    return;
+  }
+
+  window.fetch = (input, init = {}) => {
+    const requestHeaders = input instanceof Request ? input.headers : undefined;
+    const headers = appendAuthorization(createHeaders(requestHeaders));
+
+    createHeaders(init.headers).forEach((value, key) => {
+      headers.set(key, value);
+    });
+
+    if (input instanceof Request) {
+      return nativeFetch(new Request(input, { ...init, headers }));
+    }
+
+    return nativeFetch(input, { ...init, headers });
+  };
+
+  authFetchInstalled = true;
+}
+
 export async function login({ email, senha }) {
-  const { response, data } = await request("/api/usuario/login", {
+  const response = await nativeFetch(buildApiUrl("/api/Usuario/login"), {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({ email, senha })
   });
 
-  if (!response.ok || !data?.token) {
+  const data = await parseResponse(response);
+  const token = extractToken(data);
+
+  if (!response.ok || !token) {
     throw new Error(resolveErrorMessage(data, "Nao foi possivel fazer login."));
   }
 
-  saveSession(data.token);
-  return { token: data.token };
+  saveSession(token);
+  return { token };
 }
 
 export async function register({ nome, email, senha, telefone = "", cpf = "" }) {
-  const { response, data } = await request("/api/usuario/registrar", {
+  const registerUrl = new URL(buildApiUrl("/api/Usuario/registrar"));
+  registerUrl.searchParams.set("senha", senha);
+
+  const response = await nativeFetch(registerUrl, {
     method: "POST",
-    body: JSON.stringify({ nome, email, senha, telefone, cpf })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ nome, email, telefone, cpf })
   });
+
+  const data = await parseResponse(response);
 
   if (!response.ok) {
     throw new Error(resolveErrorMessage(data, "Nao foi possivel criar a conta."));
@@ -199,37 +210,9 @@ export async function register({ nome, email, senha, telefone = "", cpf = "" }) 
   return data;
 }
 
-export async function validateSession() {
-  const token = getAuthToken();
-
-  if (!token || isTokenExpired(token)) {
-    clearSession();
-    return false;
-  }
-
-  try {
-    const { response } = await request("/api/usuario/sessao");
-    return response.ok;
-  } catch {
-    return false;
-  }
-}
-
-export async function ensureAuthenticated() {
-  const sessionIsValid = await validateSession();
-
-  if (!sessionIsValid) {
-    clearSession();
-    redirectToLogin();
-    return false;
-  }
-
-  return true;
-}
-
 export async function logout() {
   try {
-    await request("/api/usuario/logout", { method: "POST" });
+    await fetch(buildApiUrl("/api/Usuario/logout"), { method: "POST" });
   } catch {
     // O logout local continua mesmo se a chamada falhar.
   }
@@ -239,9 +222,21 @@ export async function logout() {
 }
 
 export async function authenticatedRequest(path, options = {}) {
-  const { response, data } = await request(path, options);
+  const headers = appendAuthorization(createHeaders(options.headers));
+
+  if (options.body && !(options.body instanceof FormData) && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
+
+  const response = await fetch(buildApiUrl(path), {
+    ...options,
+    headers
+  });
+
+  const data = await parseResponse(response);
 
   if (response.status === 401) {
+    clearSession();
     redirectToLogin();
     throw new Error("Sessao expirada.");
   }
