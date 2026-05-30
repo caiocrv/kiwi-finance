@@ -95,6 +95,13 @@
   background: none;
 }
 
+.tipo-transacao .ativo {
+  background-color: #679800;
+  color: #ffffff;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
 .tipo-transacao button:hover {
   cursor: pointer;
   background-color: #C5C582;

@@ -7,12 +7,12 @@
         <div class="filtros">
             <div class="filtro-container">
 
-                <button class="filtro-btn" id="filtro-btn">
+                <button class="filtro-btn" id="filtro-btn" data-dias="all">
 
                     <img src="/frontend/assets/icons/filtro-periodo.svg" alt="" class="icon">
 
                     <span class="filtro-texto" id="filtro-texto">
-                        Últimos 30 dias
+                        Todas as transações
                     </span>
 
                     <span class="seta">
@@ -23,6 +23,7 @@
 
                 <ul class="filtro-opcoes" id="filtro-opcoes">
 
+                    <li data-value="all">Todas as transações</li>
                     <li data-value="30">Últimos 30 dias</li>
                     <li data-value="15">Últimos 15 dias</li>
                     <li data-value="7">Últimos 7 dias</li>
@@ -86,71 +87,20 @@
 
                 <thead class="table-header">
                     <tr>
-                        <th>Nº</th>
-                        <th>Categoria</th>
-                        <th>Descrição</th>
-                        <th>Data</th>
-                        <th>Valor</th>
+                        <th class="col-num">Nº</th>
+                        <th class="col-categoria">Categoria</th>
+                        <th class="col-descricao">Descrição</th>
+                        <th class="col-data">Data</th>
+                        <th class="col-valor">Valor</th>
                     </tr>
                 </thead>
 
                 <tbody class="lista-transacoes" id="lista-transacoes">
-                    <tr>
-                        <td>1</td>
-                        <td>Viagem</td>
-                        <td>Passagem</td>
-                        <td>20/04/2026</td>
-                        <td>R$ 1300,00</td>
-                    </tr>
+                    <!-- Transações carregadas dinamicamente -->
                 </tbody>
-                <tbody class="lista-transacoes" id="lista-transacoes">
-                    <tr>
-                        <td>1</td>
-                        <td>Viagem</td>
-                        <td>Passagem</td>
-                        <td>20/04/2026</td>
-                        <td>R$ 1300,00</td>
-                    </tr>
-                </tbody>
-                <tbody class="lista-transacoes" id="lista-transacoes">
-                    <tr>
-                        <td>1</td>
-                        <td>Viagem</td>
-                        <td>Passagem</td>
-                        <td>20/04/2026</td>
-                        <td>R$ 1300,00</td>
-                    </tr>
-                </tbody>
-                <tbody class="lista-transacoes" id="lista-transacoes">
-                    <tr>
-                        <td>1</td>
-                        <td>Viagem</td>
-                        <td>Passagem</td>
-                        <td>20/04/2026</td>
-                        <td>R$ 1300,00</td>
-                    </tr>
-                </tbody>
-                <tbody class="lista-transacoes" id="lista-transacoes">
-                    <tr>
-                        <td>1</td>
-                        <td>Viagem</td>
-                        <td>Passagem</td>
-                        <td>20/04/2026</td>
-                        <td>R$ 1300,00</td>
-                    </tr>
-                </tbody>
-                <tbody class="lista-transacoes" id="lista-transacoes">
-                    <tr>
-                        <td>1</td>
-                        <td>Viagem</td>
-                        <td>Passagem</td>
-                        <td>20/04/2026</td>
-                        <td>R$ 1300,00</td>
-                    </tr>
-                </tbody>
-        </div>
 
         </table>
+        </div>
 
     </section>
 

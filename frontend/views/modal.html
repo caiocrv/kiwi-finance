@@ -10,40 +10,42 @@
     <div class="campos-transacao">
         <h3>Tipo</h3>
         <div class="tipo-transacao">
-            <button>Receita</button>
-            <button>Despesa</button>
+            <button type="button" class="tipo-btn ativo" data-tipo="receita">
+                Receita
+            </button>
+
+            <button type="button" class="tipo-btn" data-tipo="despesa">
+                Despesa
+            </button>
+
+            <input type="hidden" id="tipo-transacao" value="receita">
         </div>
     </div>
 
     <div class="campos-transacao">
         <h3>Categoria</h3>
         <select name="Categoria" id="categoria">
-            <option value="Salário">Salário</option>
-            <option value="Investimento">Investimento</option>
-            <option value="Aluguel">Aluguel</option>
-            <option value="Alimentação">Alimentação</option>
-            <option value="Hospedagem">Hospedagem</option>
-            <option value="Automotivo">Automotivo</option>
+            <!-- As opções serão carregadas dinamicamente -->
         </select>
     </div>
 
     <div class="campos-transacao">
         <h3>Descrição</h3>
-        <input type="text" placeholder="Descrição">
+        <input type="text" id="descricao-transacao" placeholder="Descrição">
     </div>
 
     <div class="campos-transacao">
         <h3>Valor</h3>
-        <input type="number" placeholder="R$0,00">
+        <input type="text" id="valor-transacao" placeholder="R$ 0,00">
     </div>
 
     <div class="campos-transacao">
         <h3>Data</h3>
-        <input type="datetime" placeholder="00/00/0000">
+        <input type="date" id="data-transacao" max="9999-12-31">
     </div>
 
 </form>
 
 <div class="btn-registro">
-    <button type="submit">Registrar Transação</button>
+    <button type="button" id="btn-registrar-transacao">Registrar Transação</button>
 </div>

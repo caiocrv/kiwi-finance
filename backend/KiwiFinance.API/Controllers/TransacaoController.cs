@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using KiwiFinance.Core.Entities;
 using KiwiFinance.Core.Interfaces.Services;
@@ -17,23 +18,32 @@ public class TransacaoController : ControllerBase
         _transacaoService = transacaoService;
     }
 
+    private Guid ObterUsuarioId()
+    {
+        var claim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        return Guid.Parse(claim!);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Criar([FromBody] Transacao transacao)
     {
+        transacao.UsuarioId = ObterUsuarioId();
         await _transacaoService.RegistrarTransacaoAsync(transacao);
         return Ok(new { mensagem = "Transação salva com sucesso no Supabase!" });
     }
 
-    [HttpGet("{usuarioId}")]
-    public async Task<IActionResult> Listar(Guid usuarioId)
+    [HttpGet]
+    public async Task<IActionResult> Listar()
     {
+        var usuarioId = ObterUsuarioId();
         var transacoes = await _transacaoService.ListarPorUsuarioAsync(usuarioId);
         return Ok(transacoes);
     }
 
-    [HttpGet("{usuarioId}/resumo")]
-    public async Task<IActionResult> ObterResumo(Guid usuarioId)
+    [HttpGet("resumo")]
+    public async Task<IActionResult> ObterResumo()
     {
+        var usuarioId = ObterUsuarioId();
         var resumo = await _transacaoService.ObterResumoFinanceiroAsync(usuarioId);
         return Ok(resumo);
     }
