@@ -11,11 +11,22 @@ import './components/transacoes.js';
 window.toggleMenu = toggleMenu;
 window.navigate = navigate;
 
+import { aplicarTemaDarkMode } from './components/config.js';
+
 const token = requireAuthentication();
 
 if (token) {
   setupLogout();
   loadUser();
+
+  // Aplica tema Dark Mode se ativo nas preferências
+  const isDarkMode = localStorage.getItem("pref_dark_mode") === "true";
+  aplicarTemaDarkMode(isDarkMode);
+
+  // Abre a dashboard por padrão ao iniciar
+  const urlParams = new URLSearchParams(window.location.search);
+  const page = urlParams.get('page') || 'dashboard';
+  navigate(page);
 }
 
 function getTokenEmail() {
@@ -44,7 +55,8 @@ async function loadUser() {
   try {
     const user = await authenticatedRequest('/api/Usuario/me');
 
-    document.getElementById('user-name').textContent = user.nome || 'Usuario';
+    const savedNome = localStorage.getItem("config_user_nome");
+    document.getElementById('user-name').textContent = savedNome || user.nome || 'Usuario';
     document.getElementById('user-email').textContent = getTokenEmail();
   } catch {
     // O redirecionamento ja foi tratado pelo helper de autenticacao.

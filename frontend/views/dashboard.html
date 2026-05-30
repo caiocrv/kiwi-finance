@@ -1,0 +1,88 @@
+<div class="dashboard-page">
+    <h1 class="page-title">Dashboard</h1>
+
+    <!-- 3 grandes cards de resumo com visual ultra moderno -->
+    <section class="dashboard-resumo">
+        <div class="dashboard-card card-saldo">
+            <div class="card-info">
+                <p class="card-label">Saldo Total</p>
+                <h2 class="card-valor" id="dash-saldo">R$ 0,00</h2>
+            </div>
+            <div class="card-icon">
+                <img src="assets/icons/saldo.svg" alt="Saldo">
+            </div>
+        </div>
+
+        <div class="dashboard-card card-entradas">
+            <div class="card-info">
+                <p class="card-label">Total de Entradas</p>
+                <h2 class="card-valor" id="dash-entradas">R$ 0,00</h2>
+            </div>
+            <div class="card-icon">
+                <img src="assets/icons/entradas.svg" alt="Entradas">
+            </div>
+        </div>
+
+        <div class="dashboard-card card-saidas">
+            <div class="card-info">
+                <p class="card-label">Total de Saídas</p>
+                <h2 class="card-valor" id="dash-saidas">R$ 0,00</h2>
+            </div>
+            <div class="card-icon">
+                <img src="assets/icons/saidas.svg" alt="Saídas">
+            </div>
+        </div>
+    </section>
+
+    <!-- Grid de conteúdo inferior -->
+    <section class="dashboard-grid">
+        <!-- Esquerda: Lançamentos Recentes -->
+        <div class="grid-card recent-transactions">
+            <div class="grid-card-header">
+                <div class="card-title">
+                    <img src="assets/icons/fluxo-de-transacoes.svg" alt="">
+                    <h2>Lançamentos Recentes</h2>
+                </div>
+                <button class="btn-ver-todas" onclick="navigate('transacoes')">Ver todas</button>
+            </div>
+            <div class="table-container">
+                <table class="tabela-recentes">
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Descrição</th>
+                            <th>Data</th>
+                            <th style="text-align: right;">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dash-lista-transacoes">
+                        <!-- Lançamentos carregados dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Direita: Gasto por Categoria -->
+        <div class="grid-card category-insights">
+            <div class="grid-card-header">
+                <div class="card-title">
+                    <img src="assets/icons/total_transacoes.svg" alt="">
+                    <h2>Gasto por Categoria</h2>
+                </div>
+            </div>
+            <div class="insights-container">
+                <!-- Insights de gastos carregados dinamicamente -->
+                <div class="maior-gasto-alert" id="maior-gasto-container" style="display:none;">
+                    <img src="assets/icons/saidas.svg" alt="" class="alert-icon">
+                    <div>
+                        <p class="alert-title">Maior categoria de gastos</p>
+                        <p class="alert-desc" id="maior-gasto-texto">—</p>
+                    </div>
+                </div>
+                <div class="categories-progress-list" id="categorias-progresso">
+                    <!-- Barras de progresso carregadas dinamicamente -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

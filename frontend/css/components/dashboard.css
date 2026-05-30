@@ -1,0 +1,256 @@
+.dashboard-page {
+    box-sizing: border-box;
+    padding: 60px;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.dashboard-resumo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.dashboard-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-radius: 20px;
+    background-color: #F0F0D8;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    transition: all 0.25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.card-label {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+}
+
+.card-valor {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.card-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.card-saldo {
+    border-left: 5px solid #679800;
+}
+.card-saldo .card-icon {
+    background-color: rgba(103, 152, 0, 0.1);
+}
+
+.card-entradas {
+    border-left: 5px solid #2e7d32;
+}
+.card-entradas .card-icon {
+    background-color: rgba(46, 125, 80, 0.1);
+}
+.card-entradas .card-valor {
+    color: #2e7d32;
+}
+
+.card-saidas {
+    border-left: 5px solid #c62828;
+}
+.card-saidas .card-icon {
+    background-color: rgba(198, 40, 40, 0.1);
+}
+.card-saidas .card-valor {
+    color: #c62828;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 24px;
+    flex: 1;
+    min-height: 0;
+}
+
+.grid-card {
+    background-color: #F0F0D8;
+    border-radius: 24px;
+    padding: 28px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.grid-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.btn-ver-todas {
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(103, 152, 0, 0.3);
+    background-color: transparent;
+    color: #679800;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-ver-todas:hover {
+    background-color: #679800;
+    color: #FFFFFF;
+    border-color: #679800;
+}
+
+.tabela-recentes {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-recentes th {
+    text-align: left;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    font-weight: 500;
+}
+
+.tabela-recentes td {
+    padding: 14px;
+    font-size: 14px;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+
+.tabela-recentes tr:last-child td {
+    border-bottom: none;
+}
+
+/* Gasto por Categoria style */
+.insights-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.maior-gasto-alert {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 14px;
+    background-color: rgba(198, 40, 40, 0.06);
+    border: 1px dashed rgba(198, 40, 40, 0.20);
+    box-sizing: border-box;
+}
+
+.maior-gasto-alert .alert-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.alert-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #c62828;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.alert-desc {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.categories-progress-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.category-progress-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.progress-header .pct {
+    font-weight: 600;
+    color: #333;
+}
+
+.progress-bar-bg {
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #679800;
+    border-radius: 4px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 1050px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .dashboard-page {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .dashboard-page {
+        padding: 20px;
+    }
+    .card-valor {
+        font-size: 22px;
+    }
+}

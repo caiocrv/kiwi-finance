@@ -1,0 +1,76 @@
+<div class="config-page">
+    <h1 class="page-title">Configurações</h1>
+
+    <div class="config-container">
+        <!-- Esquerda: Perfil do Usuário -->
+        <section class="config-section">
+            <div class="config-card">
+                <div class="config-header">
+                    <img src="assets/icons/configuracoes.svg" alt="" class="section-icon">
+                    <h2>Perfil do Usuário</h2>
+                </div>
+                
+                <form id="profile-form" class="config-form">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="config-nome">Nome Completo</label>
+                            <input type="text" id="config-nome" placeholder="Seu nome" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="config-email">E-mail</label>
+                            <input type="email" id="config-email" placeholder="Seu e-mail" disabled>
+                            <span class="help-text">E-mail vinculado à conta (JWT).</span>
+                        </div>
+                    </div>
+                    
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="config-cpf">CPF</label>
+                            <input type="text" id="config-cpf" placeholder="000.000.000-00">
+                        </div>
+                        <div class="input-group">
+                            <label for="config-telefone">Telefone / Celular</label>
+                            <input type="text" id="config-telefone" placeholder="(00) 00000-0000">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-save">Salvar Perfil</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Direita: Preferências do Aplicativo -->
+        <section class="config-section">
+            <div class="config-card">
+                <div class="config-header">
+                    <img src="assets/icons/total_transacoes.svg" alt="" class="section-icon">
+                    <h2>Preferências do App</h2>
+                </div>
+
+                <div class="pref-list">
+                    <div class="pref-item">
+                        <div class="pref-info">
+                            <p class="pref-title">Modo Escuro (Dark Mode)</p>
+                            <p class="pref-desc">Altera o visual do aplicativo para cores escuras.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="dark-mode-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="pref-item">
+                        <div class="pref-info">
+                            <p class="pref-title">Limite de Alerta de Lançamento</p>
+                            <p class="pref-desc">Avisa se o valor de uma transação passar deste limite.</p>
+                        </div>
+                        <div class="limit-input-container">
+                            <span class="currency-symbol">R$</span>
+                            <input type="text" id="alert-limit-input" placeholder="1.000,00">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

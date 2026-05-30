@@ -64,6 +64,31 @@ export function inicializarMascaraValor() {
       let valorCentavos = parseFloat(value) / 100;
       if (valorCentavos > 1000000) {
         valorCentavos = 1000000;
+        value = "100000000"; // 1 milhão em centavos
+      }
+
+      // Alerta de Limite configurado nas preferências
+      const savedLimit = localStorage.getItem("pref_alert_limit");
+      if (savedLimit && parseInt(savedLimit) > 0) {
+        const limiteCentavos = parseFloat(savedLimit);
+        const valorDigitadoCentavos = parseFloat(value);
+        const warningEl = document.getElementById("alert-limit-warning");
+        
+        if (valorDigitadoCentavos > limiteCentavos) {
+          if (!warningEl) {
+            const container = campoValor.parentNode;
+            const msg = document.createElement("p");
+            msg.id = "alert-limit-warning";
+            msg.style.color = "#c62828";
+            msg.style.fontSize = "11px";
+            msg.style.marginTop = "4px";
+            msg.style.fontWeight = "600";
+            msg.textContent = "Aviso: Este valor ultrapassa o limite de alerta configurado!";
+            container.appendChild(msg);
+          }
+        } else if (warningEl) {
+          warningEl.remove();
+        }
       }
 
       const valorFormatado = new Intl.NumberFormat("pt-BR", {

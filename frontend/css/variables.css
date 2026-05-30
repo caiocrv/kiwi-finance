@@ -1,0 +1,17 @@
+/* Tema Escuro Integrado */
+body.dark-theme {
+    filter: invert(0.9) hue-rotate(180deg) !important;
+    background-color: #111111 !important;
+}
+
+/* Impede inversão de imagens, ícones e avatares */
+body.dark-theme img,
+body.dark-theme .icon,
+body.dark-theme .logo,
+body.dark-theme .icon-busca,
+body.dark-theme .alert-icon,
+body.dark-theme .avatar,
+body.dark-theme .seta img,
+body.dark-theme .tipo-btn img {
+    filter: invert(1) hue-rotate(180deg) !important;
+}

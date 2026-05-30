@@ -1,0 +1,260 @@
+.config-page {
+    box-sizing: border-box;
+    padding: 60px;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.config-container {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 32px;
+}
+
+.config-card {
+    background-color: #F0F0D8;
+    border-radius: 24px;
+    padding: 32px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.config-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.section-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.config-header h2 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.config-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.input-group input {
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #FDFDF7;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+    border-color: #679800;
+    box-shadow: 0 0 0 3px rgba(103, 152, 0, 0.1);
+}
+
+.input-group input:disabled {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: rgba(0, 0, 0, 0.4);
+    cursor: not-allowed;
+}
+
+.help-text {
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.btn-save {
+    height: 46px;
+    background-color: #679800;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(103, 152, 0, 0.2);
+}
+
+.btn-save:hover {
+    background-color: #79b300;
+    box-shadow: 0 6px 16px rgba(103, 152, 0, 0.3);
+}
+
+/* Pref list style */
+.pref-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.pref-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.pref-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.pref-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 70%;
+}
+
+.pref-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.pref-desc {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.15);
+    transition: .3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .3s;
+}
+
+input:checked + .slider {
+    background-color: #679800;
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Limit Input */
+.limit-input-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #FDFDF7;
+    height: 40px;
+    border-radius: 8px;
+    padding: 0 12px;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.limit-input-container:focus-within {
+    border-color: #679800;
+}
+
+.limit-input-container input {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    width: 90px;
+    color: #1a1a1a;
+}
+
+.currency-symbol {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 1050px) {
+    .config-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .config-page {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .config-page {
+        padding: 20px;
+    }
+    .input-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}

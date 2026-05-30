@@ -155,6 +155,7 @@ function inicializarFiltro() {
   filtroBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     filtroOpcoes.classList.toggle("active");
+    filtroBtn.classList.toggle("active");
   });
 
   opcoes.forEach((opcao) => {
@@ -162,6 +163,7 @@ function inicializarFiltro() {
       filtroTexto.textContent = opcao.textContent;
       filtroBtn.dataset.dias = opcao.dataset.value;
       filtroOpcoes.classList.remove("active");
+      filtroBtn.classList.remove("active");
       aplicarFiltrosEBusca();
     });
   });
@@ -172,6 +174,7 @@ function inicializarFiltro() {
 
     if (clicouFora) {
       filtroOpcoes.classList.remove("active");
+      filtroBtn.classList.remove("active");
     }
   });
 }
