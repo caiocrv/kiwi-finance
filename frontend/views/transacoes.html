@@ -1,3 +1,157 @@
-<h1>Transações</h1>
-<p>testando</p>
-<p> ola</p>
+<div class="transacoes-page">
+
+    <h1 class="page-title">Transações</h1>
+
+    <section class="actions-bar">
+
+        <div class="filtros">
+            <div class="filtro-container">
+
+                <button class="filtro-btn" id="filtro-btn">
+
+                    <img src="/frontend/assets/icons/filtro-periodo.svg" alt="" class="icon">
+
+                    <span class="filtro-texto" id="filtro-texto">
+                        Últimos 30 dias
+                    </span>
+
+                    <span class="seta">
+                        <img src="/frontend/assets/icons/arrow-down.svg" alt="Abrir opções">
+                    </span>
+
+                </button>
+
+                <ul class="filtro-opcoes" id="filtro-opcoes">
+
+                    <li data-value="30">Últimos 30 dias</li>
+                    <li data-value="15">Últimos 15 dias</li>
+                    <li data-value="7">Últimos 7 dias</li>
+
+                </ul>
+
+            </div>
+
+            <div class="input-container">
+
+                <img src="/frontend/assets/icons/input-busca.svg" alt="Buscar" class="icon-busca">
+
+                <input type="search" placeholder="Buscar por categoria..." class="input-busca">
+
+            </div>
+        </div>
+
+        <button class="btn-nova-transacao" onclick="abrirModalTransacao()">
+            <img src="/frontend/assets/icons/nova-transacao.svg" alt="">
+            Transação
+        </button>
+
+    </section>
+
+    <section class="card-transacoes">
+
+        <header class="card-header">
+            <div class="card-title">
+                <img src="/frontend/assets/icons/fluxo-de-transacoes.svg" alt="">
+                <h2>Fluxo de Transações</h2>
+            </div>
+
+            <div class="resumo-transacoes">
+
+                <div class="resumo-item" title="Total de Transações">
+                    <img src="/frontend/assets/icons/total_transacoes.svg" alt="Total de Transações"
+                        class="icon total-icon">
+                    <span class="valor" id="total-transacoes">0</span>
+                </div>
+
+                <div class="resumo-item" title="Entradas">
+                    <img src="/frontend/assets/icons/entradas.svg" alt="Entradas" class="icon entrada-icon">
+                    <span class="valor" id="total-entradas">R$0,00</span>
+                </div>
+
+                <div class="resumo-item" title="Saídas">
+                    <img src="/frontend/assets/icons/saidas.svg" alt="Saídas" class="icon saida-icon">
+                    <span class="valor" id="total-saidas">R$0,00</span>
+                </div>
+
+                <div class="resumo-item" title="Saldo">
+                    <img src="/frontend/assets/icons/saldo.svg" alt="Saldo" class="icon saldo-icon">
+                    <span class="valor" id="saldo-total">R$0,00</span>
+                </div>
+
+            </div>
+        </header>
+
+        <div class="table-container">
+            <table class="tabela-transacoes">
+
+                <thead class="table-header">
+                    <tr>
+                        <th>Nº</th>
+                        <th>Categoria</th>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+
+                <tbody class="lista-transacoes" id="lista-transacoes">
+                    <tr>
+                        <td>1</td>
+                        <td>Viagem</td>
+                        <td>Passagem</td>
+                        <td>20/04/2026</td>
+                        <td>R$ 1300,00</td>
+                    </tr>
+                </tbody>
+                <tbody class="lista-transacoes" id="lista-transacoes">
+                    <tr>
+                        <td>1</td>
+                        <td>Viagem</td>
+                        <td>Passagem</td>
+                        <td>20/04/2026</td>
+                        <td>R$ 1300,00</td>
+                    </tr>
+                </tbody>
+                <tbody class="lista-transacoes" id="lista-transacoes">
+                    <tr>
+                        <td>1</td>
+                        <td>Viagem</td>
+                        <td>Passagem</td>
+                        <td>20/04/2026</td>
+                        <td>R$ 1300,00</td>
+                    </tr>
+                </tbody>
+                <tbody class="lista-transacoes" id="lista-transacoes">
+                    <tr>
+                        <td>1</td>
+                        <td>Viagem</td>
+                        <td>Passagem</td>
+                        <td>20/04/2026</td>
+                        <td>R$ 1300,00</td>
+                    </tr>
+                </tbody>
+                <tbody class="lista-transacoes" id="lista-transacoes">
+                    <tr>
+                        <td>1</td>
+                        <td>Viagem</td>
+                        <td>Passagem</td>
+                        <td>20/04/2026</td>
+                        <td>R$ 1300,00</td>
+                    </tr>
+                </tbody>
+                <tbody class="lista-transacoes" id="lista-transacoes">
+                    <tr>
+                        <td>1</td>
+                        <td>Viagem</td>
+                        <td>Passagem</td>
+                        <td>20/04/2026</td>
+                        <td>R$ 1300,00</td>
+                    </tr>
+                </tbody>
+        </div>
+
+        </table>
+
+    </section>
+
+</div>
